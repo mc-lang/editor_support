@@ -1,0 +1,143 @@
+{
+	"name": "MCLang",
+	"fileTypes": [
+		"mcl"
+	],
+	"scopeName": "source.mcl",
+	
+	"patterns": [
+		{
+			"include": "#errors"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#definitions"
+		},
+		{
+			"include": "#placeholders"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#intrinsics"
+		},
+		{
+			"include": "#constants-and-special-vars"
+		}
+	],
+	"repository": {
+		"errors": {
+			"patterns": [
+				{
+					"name": "invalid.illegal",
+					"match": "(?<=^|\\s)(?:const|memory)\\s+(end)(?:$|\\s)"
+				},
+				{
+					"name": "invalid.illegal",
+					"match": "(?<=^|\\s)(?:fn)\\s+(done)(?:$|\\s)"
+				},
+				{
+					"name": "invalid.illegal",
+					"match": "(?<=^|\\s)(memory|const)\\s+\\S*(\\s+|$)end(?:\n|\\s)"
+				},
+				{
+					"name": "invalid.illegal",
+					"match": "(?<=^|\\s)(inline)\\s+(?!fn(\\s|$))"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				
+				{
+					"name": "keyword.declaration.mclang", 
+					"match": "(?<=\\s|^)(memory|fn|const|in|inline|include|assert|with|returns|typedef|structdef)(?:\\s|$)"
+				},
+				{
+					"name": "keyword.control.mclang",
+					"match": "(?<=\\s|^)(if|else|elif|end|done|then|while|do|if\\*)(?:\\s|$)"
+				}
+			]
+		},
+		"definitions": {
+			"patterns": [
+				{
+					"name": "support.class.mclang",
+					"match": "(?<=(memory|fn|const)\\s+)(\\S*)"
+				},
+				{
+					".disabled.name": "support.class.mclang",
+					".disabled.match": "(?<=(let|peek)\\s+)\\S+.*(?=\\s+(in))"
+				}
+			]
+		},
+		"placeholders": {
+			"patterns": [
+				{
+					"name": "markup.italic.mclang",
+					"match": "(?<=(\\s|^))_[\\S]*_(?:(\\s|$))"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.mclang",
+					"begin": "\"",
+					"end": "\"",
+					"patterns": [
+						{
+							"name": "constant.character.escape.mclang",
+							"match": "\\\\."
+						}
+					]
+				},
+				{
+					"name": "string.quoted.single.mclang",
+					"begin": "'",
+					"end": "'",
+					"patterns": [
+						{
+							"name": "constant.character.escape.mclang",
+							"match": "\\\\."
+						}
+					]
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.mclang",
+					"match": "(\/\/.*)"
+				}
+			]
+		},
+		"intrinsics": {
+			"patterns": [
+				{
+					"name": "variable.name.source.mclang",
+					"match": "(?<=^|\\s)(\\+|-|\\*|divmod|div|mod|_dbg_print|eq|lt|gt|le|ge|ne|shr|shl|bor|band|not|dup|swap|drop|over|rot|syscall0|syscall1|syscall2|syscall3|syscall4|syscall5|syscall6|\\?\\?\\?)(?=>$|\\s)"
+				}
+			]
+		},
+		"constants-and-special-vars": {
+			"patterns": [
+				{
+					"name": "constant.numeric.mclang",
+					"match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)\\b(?!\\$)"
+				},
+				{
+					"name": "entity.name.function.mclang",
+					"match": "(?<=^|\\s)([a-z|A-Z|_|\\-][0-9|a-z|A-Z|_|\\-]+\\([a-z|A-Z|_|\\-][0-9|a-z|A-Z|_|\\-]+\\)|[a-z|A-Z|_|\\-][0-9|a-z|A-Z|_|\\-]+)(?:\\s|$)"
+                }
+			]
+		}
+	}
+}
